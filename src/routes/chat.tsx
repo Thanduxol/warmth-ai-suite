@@ -126,9 +126,8 @@ function ChatPage() {
 
       <div className="border-t p-3">
         <PromptInput
-          onSubmit={(event) => {
-            event.preventDefault();
-            submit(input);
+          onSubmit={(message) => {
+            submit(message.text ?? input);
           }}
         >
           <PromptInputTextarea
