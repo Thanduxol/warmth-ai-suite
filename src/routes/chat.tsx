@@ -83,9 +83,6 @@ function ChatPage() {
               icon={<img src={emberMark} alt="" width={512} height={512} className="h-10 w-10" />}
             >
               <div className="flex flex-col items-center gap-3">
-                <img src={emberMark} alt="" width={512} height={512} className="h-10 w-10" />
-                <h2 className="font-display text-lg font-semibold">What are you working on?</h2>
-                <p className="max-w-sm text-sm text-muted-foreground">{DESCRIPTION}</p>
                 <div className="mt-2 flex flex-wrap justify-center gap-2">
                   {STARTERS.map((starter) => (
                     <Button key={starter} variant="outline" size="sm" onClick={() => submit(starter)}>
@@ -127,11 +124,12 @@ function ChatPage() {
       <div className="border-t p-3">
         <PromptInput
           onSubmit={(message) => {
-            submit(message.text ?? input);
+            submit(message.text || input);
           }}
         >
           <PromptInputTextarea
             value={input}
+            name="message"
             placeholder="Ask Ember anything about your work…"
             onChange={(event) => setInput(event.target.value)}
           />
