@@ -44,7 +44,6 @@ const STARTERS = [
 ];
 
 function ChatPage() {
-  const [input, setInput] = useState("");
   const [error, setError] = useState<string | null>(null);
 
   const { messages, sendMessage, status, stop } = useChat({
@@ -58,7 +57,6 @@ function ChatPage() {
     const trimmed = text.trim();
     if (!trimmed || busy) return;
     setError(null);
-    setInput("");
     void sendMessage({ text: trimmed });
   };
 
@@ -124,17 +122,15 @@ function ChatPage() {
       <div className="border-t p-3">
         <PromptInput
           onSubmit={(message) => {
-            submit(message.text || input);
+            submit(message.text ?? "");
           }}
         >
           <PromptInputTextarea
-            value={input}
             name="message"
             placeholder="Ask Ember anything about your work…"
-            onChange={(event) => setInput(event.target.value)}
           />
           <PromptInputFooter className="justify-end">
-            <PromptInputSubmit status={status} disabled={!input.trim() && !busy} onStop={stop} />
+            <PromptInputSubmit status={status} disabled={busy} onStop={stop} />
           </PromptInputFooter>
         </PromptInput>
         <p className="mt-2 text-[11px] text-muted-foreground">
