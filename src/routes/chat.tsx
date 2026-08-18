@@ -122,6 +122,7 @@ function ChatPage() {
       <div className="border-t p-3">
         <PromptInput
           onSubmit={(message) => {
+            console.log("SUBMIT_DBG", JSON.stringify(message.text));
             submit(message.text ?? "");
           }}
         >
